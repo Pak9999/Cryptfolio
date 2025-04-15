@@ -1,0 +1,124 @@
+/* App.css - Main application styles */
+
+:root {
+  --primary-color: #3861FB;
+  --secondary-color: #16C784;
+  --negative-color: #EA3943;
+  --dark-bg: #171924;
+  --light-bg: #F8FAFD;
+  --text-dark: #171924;
+  --text-light: #F8FAFD;
+  --border-color: #EFF2F5;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header h1 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.app-header nav ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-header nav li {
+  margin-left: 2rem;
+}
+
+.app-header nav a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.app-header nav a:hover {
+  color: var(--primary-color);
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.app-footer {
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+  color: #666;
+}
+
+.loading, .error {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.loading {
+  color: var(--text-dark);
+}
+
+.error {
+  color: var(--negative-color);
+  background-color: rgba(234, 57, 67, 0.1);
+  border-radius: 4px;
+}
+
+.positive {
+  color: var(--secondary-color);
+}
+
+.negative {
+  color: var(--negative-color);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .app-header nav {
+    margin-top: 1rem;
+  }
+  
+  .app-header nav li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .app-main {
+    padding: 1rem;
+  }
+}
