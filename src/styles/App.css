@@ -121,6 +121,38 @@ body {
   margin-right: 0.2rem;
 }
 
+/* Stats grid styling */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Crypto table container */
+.crypto-table-container {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+/* Featured chart styling */
+.featured-chart {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.featured-chart canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 400px;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .app-header {
@@ -139,5 +171,40 @@ body {
   
   .app-main {
     padding: 1rem;
+  }
+  
+  /* Responsive table styles */
+  .crypto-table th:nth-child(5),
+  .crypto-table td:nth-child(5),
+  .crypto-table th:nth-child(6),
+  .crypto-table td:nth-child(6),
+  .crypto-table th:nth-child(7),
+  .crypto-table td:nth-child(7) {
+    display: none;
+  }
+  
+  /* Adjust chart height for smaller screens */
+  .featured-chart canvas {
+    max-height: 300px;
+  }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+  .crypto-table th:nth-child(4),
+  .crypto-table td:nth-child(4) {
+    display: none;
+  }
+  
+  .featured-chart canvas {
+    max-height: 250px;
+  }
+  
+  .crypto-name span {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
   }
 }
