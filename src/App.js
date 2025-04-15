@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './styles/App.css';
 import Dashboard from './components/Dashboard';
-
+import CryptoDetail from './components/CryptoDetail';
+import { getCryptoData } from './services/cryptoService';
 
 function App() {
   const [cryptoData, setCryptoData] = useState([]);
@@ -24,7 +25,7 @@ function App() {
     };
 
     fetchCryptoData();
-    // Refresh data every 5 minutes
+    // Refreshs data every 5 minutes
     const interval = setInterval(fetchCryptoData, 300000);
     return () => clearInterval(interval);
   }, []);
@@ -37,6 +38,7 @@ function App() {
           <nav>
             <ul>
               <li><Link to="/">Dashboard</Link></li>
+              <li><Link to="/portfolio">Portfolio</Link></li>
             </ul>
           </nav>
         </header>
@@ -46,6 +48,7 @@ function App() {
           
           <Routes>
             <Route path="/" element={<Dashboard cryptoData={cryptoData} />} />
+            <Route path="/crypto/:id" element={<CryptoDetail />} />
           </Routes>
         </main>
         <footer className="app-footer">
