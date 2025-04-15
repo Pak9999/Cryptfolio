@@ -101,7 +101,7 @@ const Dashboard = ({ cryptoData }) => {
                     <Link to={`/crypto/${crypto.id}`} className="crypto-name">
                       <img src={crypto.image} alt={crypto.name} width="24" height="24" />
                       <span>{crypto.name}</span>
-                      <small>{crypto.symbol.toUpperCase()}</small>
+                      <small className="crypto-symbol-dashboard">{crypto.symbol.toUpperCase()}</small>
                     </Link>
                   </td>
                   <td>{formatCurrency(crypto.current_price)}</td>

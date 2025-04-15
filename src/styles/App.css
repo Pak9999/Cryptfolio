@@ -100,6 +100,27 @@ body {
   color: var(--negative-color);
 }
 
+.crypto-symbol-dashboard {
+  margin-left: 0.3rem;
+  color: #666;
+  font-weight: normal;
+}
+
+.crypto-name {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.crypto-name img {
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.crypto-name span {
+  margin-right: 0.2rem;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .app-header {
