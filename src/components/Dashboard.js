@@ -10,6 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const Dashboard = ({ cryptoData }) => {
   const [globalData, setGlobalData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchGlobalData = async () => {
@@ -45,6 +46,14 @@ const Dashboard = ({ cryptoData }) => {
   const getColorClass = (value) => {
     return value > 0 ? 'positive' : value < 0 ? 'negative' : '';
   };
+  
+  // Filter cryptocurrencies by search term
+  const filteredData = cryptoData.filter(crypto => {
+    return (
+      crypto.name.toLowerCase().includes(search.toLowerCase()) ||
+      crypto.symbol.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   return (
     <div className="dashboard">
@@ -77,9 +86,19 @@ const Dashboard = ({ cryptoData }) => {
         </div>
       )}
 
-      {/* Top Cryptocurrencies */}
+      {/* Top Cryptocurrencies with Search */}
       <div className="top-cryptos">
-        <h3>Top Cryptocurrencies</h3>
+        <div className="market-header">
+          <h3>Top Cryptocurrencies</h3>
+          <div className="search-container">
+            <input 
+              type="text" 
+              placeholder="Search by name or symbol..." 
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
+            />
+          </div>
+        </div>
         <div className="crypto-table-container">
           <table className="crypto-table">
             <thead>
@@ -94,7 +113,7 @@ const Dashboard = ({ cryptoData }) => {
               </tr>
             </thead>
             <tbody>
-              {cryptoData.slice(0, 10).map((crypto, index) => (
+              {filteredData.slice(0, 10).map((crypto, index) => (
                 <tr key={crypto.id}>
                   <td>{index + 1}</td>
                   <td>

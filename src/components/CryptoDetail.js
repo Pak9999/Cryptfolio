@@ -67,11 +67,18 @@ const CryptoDetail = () => {
 
   // Format percentage change
   const formatPercentage = (num) => {
+    // Handle null, undefined or NaN values
+    if (num === null || num === undefined || isNaN(num)) {
+      return 'N/A';
+    }
     return `${num > 0 ? '+' : ''}${num.toFixed(2)}%`;
   };
 
   // Determine color class based on value
   const getColorClass = (value) => {
+    if (value === null || value === undefined || isNaN(value)) {
+      return '';
+    }
     return value > 0 ? 'positive' : value < 0 ? 'negative' : '';
   };
 

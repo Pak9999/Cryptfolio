@@ -30,11 +30,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .app-header h1 {
   margin: 0;
   color: var(--primary-color);
+}
+
+.app-header nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .app-header nav ul {
@@ -57,6 +65,37 @@ body {
 
 .app-header nav a:hover {
   color: var(--primary-color);
+}
+
+.refresh-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.refresh-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.refresh-button:hover:not(:disabled) {
+  background-color: #2d4fd7;
+}
+
+.refresh-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.last-updated {
+  font-size: 0.8rem;
+  color: #666;
 }
 
 .app-main {
@@ -153,6 +192,12 @@ body {
   max-height: 400px;
 }
 
+.view-all {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .app-header {
@@ -206,5 +251,109 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
+  }
+}
+
+/* Market Page Styles */
+.market-page {
+  max-width: 100%;
+}
+
+.market-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 250px;
+  font-size: 0.9rem;
+}
+
+.crypto-table th {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.crypto-table th:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pagination-btn {
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.pagination-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments for market page */
+@media (max-width: 1200px) {
+  .crypto-table th:nth-child(8),
+  .crypto-table td:nth-child(8) {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .crypto-table th:nth-child(6),
+  .crypto-table td:nth-child(6),
+  .crypto-table th:nth-child(7),
+  .crypto-table td:nth-child(7) {
+    display: none;
+  }
+  
+  .market-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-container {
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .last-updated {
+    display: none;
   }
 }
