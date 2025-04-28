@@ -1,0 +1,364 @@
+/* Portfolio.css - Portfolio component styles */
+
+.portfolio-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-header {
+  margin-bottom: 1.5rem;
+}
+
+.portfolio-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.portfolio-value span {
+  font-size: 1rem;
+  margin-left: 1rem;
+  font-weight: normal;
+}
+
+/* Portfolio line chart styles */
+.portfolio-line-chart {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 2rem;
+}
+
+.portfolio-line-chart h3 {
+  margin-bottom: 1rem;
+}
+
+/* Portfolio allocation section */
+.portfolio-allocation {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-allocation h3 {
+  margin-bottom: 1rem;
+}
+
+/* Make pie chart smaller and contained */
+.portfolio-pie-chart {
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+/* Add crypto form grid layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.add-crypto form {
+  width: 100%;
+}
+
+.add-crypto .btn {
+  width: fit-content;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Search functionality styles */
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 0 0 4px 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f8fafd;
+}
+
+.search-result-item img {
+  margin-right: 0.75rem;
+}
+
+.search-result-item span {
+  margin-right: 0.75rem;
+}
+
+.search-result-item small {
+  color: #666;
+}
+
+/* Table responsive wrapper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Holdings table styles */
+.crypto-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crypto-name img {
+  margin-right: 0.5rem;
+}
+
+.crypto-name small {
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+.no-holdings {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-edit {
+  background-color: #3861FB;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.btn-edit:hover {
+  background-color: #2d4fd7;
+}
+
+.btn-remove {
+  background-color: #EA3943;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.btn-remove:hover {
+  background-color: #d33038;
+}
+
+/* Profit/Loss and change indicators */
+.positive {
+  color: #16C784;
+}
+
+.negative {
+  color: #EA3943;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eff2f5;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.code-container {
+  margin: 1rem 0;
+}
+
+.portfolio-code {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: monospace;
+  resize: vertical;
+  overflow-wrap: break-word;
+}
+
+.modal-info {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #f8fafd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eff2f5;
+}
+
+.error-message {
+  color: var(--negative-color);
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(234, 57, 67, 0.1);
+  border-radius: 4px;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .portfolio-pie-chart {
+    max-width: 100%;
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-value {
+    font-size: 1.75rem;
+  }
+
+  .portfolio-value span {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .portfolio-line-chart {
+    height: 250px;
+  }
+  
+  .portfolio-pie-chart {
+    height: 250px;
+  }
+  
+  /* Adjust table for smaller screens */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  .modal-content {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-line-chart {
+    height: 200px;
+  }
+
+  .portfolio-allocation {
+    overflow-x: hidden;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions .btn {
+    width: 100%;
+  }
+  
+  .modal-footer {
+    flex-direction: column;
+  }
+  
+  .modal-footer button {
+    width: 100%;
+  }
+}

@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import CryptoDetail from './components/CryptoDetail';
 import MarketPage from './components/MarketPage';
 import { getCryptoData, apiCache } from './services/cryptoService';
+import Portfolio from './components/Portfolio';
 
 function App() {
   const [cryptoData, setCryptoData] = useState([]);
@@ -88,13 +89,13 @@ function App() {
               onClick={handleManualRefresh} 
               disabled={refreshing} 
               className="refresh-button"
-              title={lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString()}` : 'Refresh data'}
+              title={lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString([], {hour12: false})}` : 'Refresh data'}
             >
               {refreshing ? 'Refreshing...' : 'Refresh'}
             </button>
             {lastUpdated && (
               <span className="last-updated">
-                Last updated: {lastUpdated.toLocaleTimeString()}
+                Last updated: {lastUpdated.toLocaleTimeString([], {hour12: false})}
               </span>
             )}
           </div>
@@ -107,6 +108,7 @@ function App() {
             <Route path="/" element={<Dashboard cryptoData={cryptoData} />} />
             <Route path="/crypto/:id" element={<CryptoDetail />} />
             <Route path="/market" element={<MarketPage />} />
+            <Route path="/portfolio" element={<Portfolio cryptoData={cryptoData} />} />
           </Routes>
         </main>
         <footer className="app-footer">
