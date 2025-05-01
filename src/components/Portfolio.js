@@ -4,6 +4,7 @@ import { Pie, Line } from 'react-chartjs-2';
 import '../styles/Portfolio.css';
 import { getCryptoData } from '../services/cryptoService';
 import { portfolioToCode, codeToPortfolio, isValidPortfolioCode } from '../services/portfolioCodeService';
+import { savePortfolio, loadPortfolio, isStorageAvailable } from '../services/sessionService';
 
 // Register ChartJS components
 ChartJS.register(
@@ -52,13 +53,15 @@ const Portfolio = ({ cryptoData = [] }) => {
 
   // Load portfolio from local storage on component mount
   useEffect(() => {
-    const savedPortfolio = localStorage.getItem('cryptfolio-portfolio');
-    if (savedPortfolio) {
-      setPortfolio(JSON.parse(savedPortfolio));
+    // Check if localStorage is available
+    if (isStorageAvailable()) {
+      const savedPortfolio = loadPortfolio();
+      if (savedPortfolio && savedPortfolio.length > 0) {
+        setPortfolio(savedPortfolio);
+      }
     }
     
     // Generate mock historical portfolio values for demonstration
-    // In a real app, you'd track actual portfolio values over time
     generateMockHistoricalData();
   }, []);
   
@@ -172,7 +175,9 @@ const Portfolio = ({ cryptoData = [] }) => {
 
   // Save portfolio to local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem('cryptfolio-portfolio', JSON.stringify(portfolio));
+    if (isStorageAvailable()) {
+      savePortfolio(portfolio);
+    }
   }, [portfolio]);
 
   const handleInputChange = (e) => {
@@ -232,8 +237,7 @@ const Portfolio = ({ cryptoData = [] }) => {
       // If updating existing entry, we need to calculate weighted average purchase price
       const existing = portfolio[existingIndex];
       const totalAmount = existing.amount + newEntry.amount;
-      const weightedPrice = ((existing.amount * (existing.purchasePrice || 0)) + 
-                           (newEntry.amount * newEntry.purchasePrice)) / totalAmount;
+      const weightedPrice = ((existing.amount * (existing.purchasePrice || 0)) + (newEntry.amount * newEntry.purchasePrice)) / totalAmount;
       
       const updatedPortfolio = [...portfolio];
       updatedPortfolio[existingIndex] = {
@@ -708,6 +712,7 @@ const Portfolio = ({ cryptoData = [] }) => {
                             {profitLossPercent > 0 ? '▲' : profitLossPercent < 0 ? '▼' : ''} 
                             {Math.abs(profitLossPercent).toFixed(2)}%
                           </> : '-'}
+
                       </td>
                       <td className={change > 0 ? 'positive' : 'negative'}>
                         {change > 0 ? '▲' : '▼'} {Math.abs(change).toFixed(2)}%
