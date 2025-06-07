@@ -3,9 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Cryptfolio/',
-  server: {
-    port: 3000,
+  base: '/Cryptfolio/',  server: {
+    port: 5173,
     open: true
   },
   build: {

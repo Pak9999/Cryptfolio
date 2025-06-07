@@ -1,7 +1,24 @@
 import axios from 'axios';
 
-// Base URL for CoinGecko API
-const API_BASE_URL = 'https://api.coingecko.com/api/v3';
+// Determine the proxy base URL based on environment
+const getProxyBaseUrl = () => {
+  // Check if we're running in development
+  if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
+    // For local development with Netlify CLI: `netlify dev`
+    return 'http://localhost:8888/.netlify/functions/crypto-proxy';
+  } else {
+    // For production - detect if we're on Netlify or use a fallback
+    const hostname = window.location.hostname;
+    
+    // If deployed on Netlify, use the current domain
+    if (hostname.includes('netlify.app') || hostname.includes('netlify.com')) {
+      return `${window.location.protocol}//${hostname}/.netlify/functions/crypto-proxy`;
+    }    // Fallback for GitHub Pages or other deployments - using your Netlify proxy URL
+    return 'https://Cryptfolioproxy.netlify.app/.netlify/functions/crypto-proxy';
+  }
+};
+
+const PROXY_BASE_URL = getProxyBaseUrl();
 
 // Data Cache configuration
 const CACHE_DURATION = {
@@ -87,7 +104,7 @@ const cache = {
   }
 };
 
-// Helper function to make API calls with caching
+// Helper function to make API calls with caching using proxy
 const cachedApiCall = async (endpoint, params = {}, cacheKey, cacheDuration) => {
   // Create a unique cache key based on endpoint and parameters
   const fullCacheKey = cacheKey || `${endpoint}_${JSON.stringify(params)}`;
@@ -106,10 +123,20 @@ const cachedApiCall = async (endpoint, params = {}, cacheKey, cacheDuration) => 
   }
   
   try {
-    // Make API call if no cache found
-    const response = await axios.get(`${API_BASE_URL}${endpoint}`, { 
-      params,
-      timeout: 10000, // 10 second timeout
+    // Build proxy URL with path parameter
+    const proxyUrl = new URL(PROXY_BASE_URL);
+    proxyUrl.searchParams.set('path', endpoint);
+    
+    // Add all other parameters to the proxy URL
+    Object.entries(params).forEach(([key, value]) => {
+      proxyUrl.searchParams.set(key, value);
+    });
+    
+    console.log('Making proxy request to:', proxyUrl.toString());
+    
+    // Make API call through proxy
+    const response = await axios.get(proxyUrl.toString(), { 
+      timeout: 15000, // 15 second timeout (increased for proxy)
       headers: {
         'Accept': 'application/json',
       }

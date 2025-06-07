@@ -95,13 +95,80 @@ Cryptfolio/
 └── README.md
 ```
 
-## API Integration
+## API Integration & CORS Setup
 
-This project uses the free tier of the CoinGecko API. The application includes:
+This project uses the CoinGecko API through a Netlify serverless function to avoid CORS issues. The application includes:
 
-- **Caching**: Reduces API calls by caching responses
-- **Error Handling**: Hopefully graceful fallbacks when API is unavailable
-- **Rate Limiting**: Respects API rate limits
+- **Netlify Proxy**: Serverless function that proxies API requests to avoid CORS issues
+- **Caching**: Reduces API calls by caching responses locally
+- **Error Handling**: Graceful fallbacks when API is unavailable
+- **Rate Limiting**: Respects API rate limits with intelligent caching
+
+### Development Setup with Netlify
+
+For local development with the proxy function:
+
+1. **Install Netlify CLI** (if not already installed):
+```bash
+npm install -g netlify-cli
+```
+
+2. **Test the proxy function locally**:
+```bash
+npx netlify functions:serve
+```
+This will start the function server at `http://localhost:9999`
+
+3. **Run the React app in another terminal**:
+```bash
+npm run dev
+```
+This will start Vite at `http://localhost:5173`
+
+4. **Alternative: Run with Netlify Dev** (recommended for testing):
+```bash
+npm run dev:netlify
+```
+This runs both the function server and Vite together
+
+### Deployment Options
+
+#### Option 1: Deploy to Netlify (Recommended)
+1. **Create a Netlify account** at [netlify.com](https://netlify.com)
+2. **Connect your GitHub repository** to Netlify
+3. **Configure build settings**:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: `18` (set in netlify.toml)
+4. **Deploy the site** - Netlify will automatically build and deploy
+5. **Update the proxy URL**: After deployment, copy your Netlify URL and update:
+   - `.env.example` → `.env.local` with your actual Netlify URL
+   - Or the fallback URL in `src/services/cryptoService.js`
+
+#### Option 2: GitHub Pages with External Proxy
+If you prefer GitHub Pages:
+1. **Deploy the Netlify function separately** (create a separate Netlify account just for the proxy)
+2. **Update the proxy URL** in `src/services/cryptoService.js`
+3. **Deploy to GitHub Pages**: `npm run deploy`
+
+### Testing the CORS Fix
+
+You can test if the proxy is working by:
+1. **Check browser console** - no more CORS errors
+2. **Test function directly**:
+```bash
+# Local testing
+curl "http://localhost:9999/.netlify/functions/crypto-proxy?path=/global"
+
+# Production testing (replace with your URL)
+curl "https://your-site.netlify.app/.netlify/functions/crypto-proxy?path=/global"
+```
+
+### Environment Configuration
+Copy `.env.example` to `.env.local` and update with your Netlify URL:
+```bash
+cp .env.example .env.local
+```
 
 ## Contributing
 
