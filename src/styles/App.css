@@ -7,31 +7,102 @@
   --text-dark: #171924;
   --text-light: #F8FAFD;
   --border-color: #EFF2F5;
+  
+  /* Light theme variables */
+  --bg-primary: #F8FAFD;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f8f8f8;
+  --text-primary: #171924;
+  --text-secondary: #666666;
+  --border-primary: #EFF2F5;
+  --border-secondary: #e0e0e0;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+  --hover-bg: #f8fafd;
+  --input-bg: #ffffff;
+}
+
+/* Dark theme variables */
+.dark {
+  --bg-primary: #0D1421;
+  --bg-secondary: #1A202C;
+  --bg-tertiary: #2D3748;
+  --text-primary: #F7FAFC;
+  --text-secondary: #A0AEC0;
+  --border-primary: #2D3748;
+  --border-secondary: #4A5568;
+  --card-bg: #1A202C;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --hover-bg: #2D3748;
+  --input-bg: #2D3748;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--light-bg);
-  color: var(--text-dark);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global text styling */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+p {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Table data styling */
+td {
+  color: var(--text-primary);
+}
+
+/* Dashboard specific styling */
+.dashboard h2 {
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.market-stats h3 {
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.market-stats p {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.top-cryptos h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--bg-primary);
 }
 
 .app-header {
-  background-color: white;
+  background-color: var(--card-bg);
   padding: 1rem 2rem;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px var(--card-shadow);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .app-header h1 {
@@ -57,7 +128,7 @@ body {
 }
 
 .app-header nav a {
-  color: var(--text-dark);
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
@@ -71,6 +142,27 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.theme-toggle {
+  padding: 0.5rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+  transform: scale(1.05);
 }
 
 .refresh-button {
@@ -95,7 +187,7 @@ body {
 
 .last-updated {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .app-main {
@@ -110,9 +202,11 @@ body {
 .app-footer {
   padding: 1rem 2rem;
   text-align: center;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-primary);
   margin-top: 2rem;
-  color: #666;
+  color: var(--text-secondary);
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .loading, .error {
@@ -122,7 +216,7 @@ body {
 }
 
 .loading {
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .error {
@@ -141,7 +235,7 @@ body {
 
 .crypto-symbol-dashboard {
   margin-left: 0.3rem;
-  color: #666;
+  color: var(--text-secondary);
   font-weight: normal;
 }
 
@@ -275,10 +369,12 @@ body {
 
 .search-input {
   padding: 0.5rem 1rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   width: 250px;
   font-size: 0.9rem;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .crypto-table th {
@@ -288,7 +384,7 @@ body {
 }
 
 .crypto-table th:hover {
-  background-color: #f0f0f0;
+  background-color: var(--hover-bg);
 }
 
 .pagination {
@@ -302,15 +398,16 @@ body {
 .pagination-btn {
   padding: 0.5rem 1rem;
   margin: 0 0.25rem;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
+  color: var(--text-primary);
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background-color: #e0e0e0;
+  background-color: var(--hover-bg);
 }
 
 .pagination-btn.active {

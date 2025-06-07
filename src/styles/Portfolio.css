@@ -13,6 +13,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-top: 0.5rem;
+  color: var(--text-primary);
 }
 
 .portfolio-value span {
@@ -43,7 +44,6 @@
   margin-bottom: 1rem;
 }
 
-/* Make pie chart smaller and contained */
 .portfolio-pie-chart {
   width: 100%;
   max-width: 400px;
@@ -51,7 +51,6 @@
   margin: 0 auto;
 }
 
-/* Add crypto form grid layout */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -86,9 +85,11 @@
 .form-group input,
 .form-group select {
   padding: 0.75rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 }
 
 /* Search functionality styles */
@@ -99,10 +100,19 @@
 
 .search-input {
   padding: 0.75rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(56, 97, 251, 0.1);
 }
 
 .search-results {
@@ -110,13 +120,13 @@
   top: 100%;
   left: 0;
   right: 0;
-  background-color: white;
-  border: 1px solid #e0e0e0;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-secondary);
   border-radius: 0 0 4px 4px;
   max-height: 250px;
   overflow-y: auto;
   z-index: 10;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--card-shadow);
 }
 
 .search-result-item {
@@ -124,10 +134,11 @@
   align-items: center;
   padding: 0.75rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .search-result-item:hover {
-  background-color: #f8fafd;
+  background-color: var(--hover-bg);
 }
 
 .search-result-item img {
@@ -136,10 +147,11 @@
 
 .search-result-item span {
   margin-right: 0.75rem;
+  color: var(--text-primary);
 }
 
 .search-result-item small {
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Table responsive wrapper */
@@ -160,14 +172,14 @@
 }
 
 .crypto-name small {
-  color: #666;
+  color: var(--text-secondary);
   margin-left: 0.5rem;
 }
 
 .no-holdings {
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Action buttons */
@@ -177,7 +189,7 @@
 }
 
 .btn-edit {
-  background-color: #3861FB;
+  background-color: var(--primary-color);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
@@ -189,7 +201,7 @@
 }
 
 .btn-remove {
-  background-color: #EA3943;
+  background-color: var(--negative-color);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
@@ -224,13 +236,13 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px var(--card-shadow);
 }
 
 .modal-header {
@@ -238,7 +250,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eff2f5;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .modal-header h3 {
@@ -250,7 +262,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .modal-body {
@@ -265,17 +277,19 @@
   width: 100%;
   min-height: 100px;
   padding: 0.75rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   font-family: monospace;
   resize: vertical;
   overflow-wrap: break-word;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
 }
 
 .modal-info {
   margin-top: 1rem;
   padding: 0.75rem;
-  background-color: #f8fafd;
+  background-color: var(--bg-tertiary);
   border-radius: 4px;
   font-size: 0.9rem;
 }
@@ -285,7 +299,7 @@
   justify-content: flex-end;
   gap: 1rem;
   padding: 1rem 1.5rem;
-  border-top: 1px solid #eff2f5;
+  border-top: 1px solid var(--border-primary);
 }
 
 .error-message {

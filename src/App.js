@@ -15,13 +15,14 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [userSettings, setUserSettings] = useState(null);
-
+  const [theme, setTheme] = useState('light');
   // Load user settings and record visit on component mount
   useEffect(() => {
     if (isStorageAvailable()) {
       // Load user settings
       const settings = loadUserSettings();
       setUserSettings(settings);
+      setTheme(settings.theme || 'light');
       
       // Record this visit
       updateLastVisit();
@@ -74,10 +75,16 @@ function App() {
       setRefreshing(false);
     }
   };
-  
-  // Manual refresh function that users can trigger
+    // Manual refresh function that users can trigger
   const handleManualRefresh = () => {
     fetchCryptoData(true); // Force refresh by clearing cache
+  };
+
+  // Theme toggle function
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    setUserSettings(prev => ({ ...prev, theme: newTheme }));
   };
 
   useEffect(() => {
@@ -98,10 +105,9 @@ function App() {
       saveUserSettings(userSettings);
     }
   }, [userSettings]);
-
   return (
     <Router>
-      <div className="app-container">        <header className="app-header">
+      <div className={`app-container ${theme}`}>        <header className="app-header">
           <h1><Link to="/">Cryptfolio</Link></h1>
           <nav>
             <ul>
@@ -111,6 +117,13 @@ function App() {
             </ul>
           </nav>
           <div className="refresh-container">
+            <button 
+              onClick={toggleTheme} 
+              className="theme-toggle"
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+            >
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
             <button 
               onClick={handleManualRefresh} 
               disabled={refreshing} 

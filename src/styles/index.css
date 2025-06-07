@@ -37,24 +37,34 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
   padding: 0.75rem;
   text-align: left;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 th {
-  background-color: #f8f8f8;
+  background-color: var(--bg-tertiary);
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 tr {
-  border-bottom: 1px solid #eff2f5;
+  border-bottom: 1px solid var(--border-primary);
+  transition: background-color 0.2s ease;
 }
 
 tr:hover {
-  background-color: #f8fafd;
+  background-color: var(--hover-bg);
+}
+
+tr:last-child td {
+  border-bottom: none;
 }
 
 /* Common utility classes */
@@ -66,18 +76,20 @@ tr:hover {
 }
 
 .card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px var(--card-shadow);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
 }
 
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  background-color: #3861FB;
+  background-color: var(--primary-color);
   color: white;
   font-weight: 500;
   cursor: pointer;
@@ -90,10 +102,10 @@ tr:hover {
 
 .btn-outline {
   background-color: transparent;
-  border: 1px solid #3861FB;
-  color: #3861FB;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
 }
 
 .btn-outline:hover {
-  background-color: #f0f4fe;
+  background-color: var(--bg-tertiary);
 }

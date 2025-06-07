@@ -6,7 +6,7 @@
 .back-link {
   display: inline-block;
   margin-bottom: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -36,13 +36,13 @@
 }
 
 .crypto-symbol {
-  color: #666;
+  color: var(--text-secondary);
   font-weight: normal;
   margin-left: 0.5rem;
 }
 
 .crypto-rank {
-  color: #666;
+  color: var(--text-secondary);
   margin-top: 0.25rem;
 }
 
@@ -54,6 +54,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 0.25rem;
+  color: var(--text-primary);
 }
 
 .price-change {
@@ -75,8 +76,9 @@
 .timeframe-selector button {
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  background-color: #f1f1f1;
-  color: #333;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -84,7 +86,7 @@
 }
 
 .timeframe-selector button:hover {
-  background-color: #e5e5e5;
+  background-color: var(--hover-bg);
 }
 
 .timeframe-selector button.active {
@@ -105,12 +107,13 @@
 }
 
 .data-label {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.875rem;
 }
 
 .data-value {
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 .data-value span {
@@ -125,6 +128,7 @@
 
 .description {
   line-height: 1.6;
+  color: var(--text-primary);
 }
 
 .description a {
