@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Pie, Line } from 'react-chartjs-2';
 import '../styles/Portfolio.css';
@@ -208,7 +208,7 @@ const Portfolio = ({ cryptoData = [] }) => {
       return;
     }
     
-    if (!formData.crypto || !formData.amount || isNaN(formData.amount) || parseFloat(formData.amount) <= 0) {
+    if (!formData.crypto || !formData.amount || isNaN(Number(formData.amount)) || parseFloat(formData.amount) <= 0) {
       alert('Please select a cryptocurrency and enter a valid amount');
       return;
     }
@@ -680,10 +680,9 @@ const Portfolio = ({ cryptoData = [] }) => {
                   const crypto = cryptoData.find(c => c.id === item.id);
                   if (!crypto) return (
                     <tr key={item.id}>
-                      <td colSpan="9">Loading data for {item.name}...</td>
+                      <td colSpan={9}>Loading data for {item.name}...</td>
                     </tr>
                   );
-                  
                   const value = item.amount * crypto.current_price;
                   const change = crypto.price_change_percentage_24h;
                   const profitLossPercent = calculateProfitLoss(
@@ -749,14 +748,13 @@ const Portfolio = ({ cryptoData = [] }) => {
               <button className="close-btn" onClick={() => setShowCodeModal(false)}>×</button>
             </div>
             <div className="modal-body">
-              <p>Copy this code to save or share your portfolio:</p>
-              <div className="code-container">
+              <p>Copy this code to save or share your portfolio:</p>              <div className="code-container">
                 <textarea 
                   ref={codeRef}
                   readOnly
                   value={portfolioCode}
                   className="portfolio-code"
-                  onClick={(e) => e.target.select()}
+                  onClick={() => codeRef.current?.select()}
                 />
               </div>
               <div className="modal-info">
