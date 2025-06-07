@@ -1,6 +1,10 @@
 // Simple proxy server for local development
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 const PORT = 8888;
@@ -33,15 +37,26 @@ app.get('/.netlify/functions/crypto-proxy', async (req, res) => {
     
     if (queryParams.toString()) {
       apiUrl += `?${queryParams.toString()}`;
+    }    console.log('Proxying request to:', apiUrl);
+    
+    // Prepare headers with API key if available
+    const requestHeaders = {
+      'Accept': 'application/json',
+      'User-Agent': 'Cryptfolio-App/1.0'
+    };    // Add CoinGecko API key if available (from environment variables)
+    const apiKey = process.env.COINGECKO_API_KEY;
+    console.log('API Key available:', apiKey ? 'Yes (length: ' + apiKey.length + ')' : 'No');
+    if (apiKey) {
+      // Use x-cg-demo-api-key for free tier or x-cg-pro-api-key for pro tier
+      requestHeaders['x-cg-demo-api-key'] = apiKey;
+      console.log('Added API key to request headers');
+    } else {
+      console.log('No API key found in environment variables');
     }
 
-    console.log('Proxying request to:', apiUrl);
-      const response = await fetch(apiUrl, {
+    const response = await fetch(apiUrl, {
       method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Cryptfolio-App/1.0'
-      }
+      headers: requestHeaders
     });
     
     if (!response.ok) {

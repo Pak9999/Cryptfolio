@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/Cryptfolio/',  server: {
     port: 5173,
-    open: true
+    open: false
   },
   build: {
     outDir: 'dist',

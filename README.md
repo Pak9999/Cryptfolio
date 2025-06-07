@@ -44,11 +44,23 @@ npm install
 
 3. **Start the development server**
 
+For the best development experience with full API functionality:
+
+```bash
+npm run dev:netlify
+```
+
+This will start both the Netlify functions (with API key support) and the React app. The application will be available at:
+- Frontend: `http://localhost:8888` (Netlify dev server)
+- API Functions: `http://localhost:8888/.netlify/functions/`
+
+Alternatively, you can run just the Vite server (limited API functionality due to rate limits):
+
 ```bash
 npm run dev
 ```
 
-The application will open in your browser at `http://localhost:3000`.
+**Note:** The `dev:netlify` command is recommended as it uses the authenticated CoinGecko API proxy, avoiding rate limits.
 
 ## Features
 
@@ -106,7 +118,15 @@ This project uses the CoinGecko API through a Netlify serverless function to avo
 
 ### Development Setup with Netlify
 
-For local development with the proxy function:
+For local development with full API functionality:
+
+**Recommended Approach:**
+```bash
+npm run dev:netlify
+```
+This single command starts both the Netlify dev server and the React app with full API key support.
+
+**Alternative Manual Setup:**
 
 1. **Install Netlify CLI** (if not already installed):
 ```bash
@@ -125,11 +145,12 @@ npm run dev
 ```
 This will start Vite at `http://localhost:5173`
 
-4. **Alternative: Run with Netlify Dev** (recommended for testing):
-```bash
-npm run dev:netlify
-```
-This runs both the function server and Vite together
+**API Key Configuration:**
+- Add your CoinGecko API key to the `.env` file as `COINGECKO_API_KEY=your_key_here`
+- The local development automatically uses the deployed Netlify proxy with API authentication
+- This ensures consistent behavior between local development and production
+
+### Deployment Options
 
 ### Deployment Options
 
@@ -140,16 +161,19 @@ This runs both the function server and Vite together
    - Build command: `npm run build`
    - Publish directory: `dist`
    - Node version: `18` (set in netlify.toml)
-4. **Deploy the site** - Netlify will automatically build and deploy
-5. **Update the proxy URL**: After deployment, copy your Netlify URL and update:
-   - `.env.example` → `.env.local` with your actual Netlify URL
-   - Or the fallback URL in `src/services/cryptoService.js`
+4. **Add environment variables**:
+   - Go to Site settings → Environment variables
+   - Add `COINGECKO_API_KEY` with your CoinGecko API key
+5. **Deploy the site** - Netlify will automatically build and deploy
 
 #### Option 2: GitHub Pages with External Proxy
 If you prefer GitHub Pages:
 1. **Deploy the Netlify function separately** (create a separate Netlify account just for the proxy)
-2. **Update the proxy URL** in `src/services/cryptoService.js`
-3. **Deploy to GitHub Pages**: `npm run deploy`
+2. **Add your API key** to the Netlify environment variables
+3. **Update the proxy URL** in `src/services/cryptoService.js` if needed
+4. **Deploy to GitHub Pages**: `npm run deploy`
+
+**Note:** The current configuration uses the deployed Netlify proxy for both local development and production, ensuring consistent API authentication.
 
 ### Testing the CORS Fix
 
@@ -170,14 +194,39 @@ Copy `.env.example` to `.env.local` and update with your Netlify URL:
 cp .env.example .env.local
 ```
 
-## Contributing
+## API Key Setup
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+This application uses the CoinGecko API with authentication to avoid rate limits. To set up your API key:
 
+### 1. Get a CoinGecko API Key
+1. Visit [CoinGecko API](https://www.coingecko.com/en/api)
+2. Sign up for a free account
+3. Generate your API key from the dashboard
+
+### 2. Configure for Local Development
+1. **Create/update the `.env` file** in your project root:
+```bash
+COINGECKO_API_KEY=your_actual_api_key_here
+```
+
+2. **Restart your development server**:
+```bash
+npm run dev:netlify
+```
+
+### 3. Configure for Netlify Deployment
+1. **Go to your Netlify site dashboard**
+2. **Navigate to Site settings → Environment variables**
+3. **Add a new variable**:
+   - Key: `COINGECKO_API_KEY`
+   - Value: Your actual CoinGecko API key
+4. **Redeploy your site**
+
+### API Integration Features
+- **Authenticated Requests**: Uses API key to avoid rate limits
+- **Intelligent Caching**: Reduces API calls with local caching
+- **Fallback System**: Uses cached data when API is unavailable
+- **Consistent Proxy**: Same authenticated proxy for local development and production
 
 ## Authors
 

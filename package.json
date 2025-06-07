@@ -8,6 +8,7 @@
     "dev": "vite",
     "dev:netlify": "npx netlify dev",
     "dev:proxy": "concurrently \"node proxy-server.js\" \"vite\"",
+    "dev:local-proxy": "concurrently \"node proxy-server.js\" \"vite\"",
     "proxy": "node proxy-server.js",
     "start": "vite",
     "build": "vite build",
