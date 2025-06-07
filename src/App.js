@@ -5,6 +5,8 @@ import Dashboard from './components/Dashboard';
 import CryptoDetail from './components/CryptoDetail';
 import MarketPage from './components/MarketPage';
 import { getCryptoData, apiCache } from './services/cryptoService';
+import Portfolio from './components/Portfolio';
+import { updateLastVisit, getLastVisit, saveUserSettings, loadUserSettings, isStorageAvailable } from './services/sessionService';
 
 function App() {
   const [cryptoData, setCryptoData] = useState([]);
@@ -12,6 +14,25 @@ function App() {
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [userSettings, setUserSettings] = useState(null);
+
+  // Load user settings and record visit on component mount
+  useEffect(() => {
+    if (isStorageAvailable()) {
+      // Load user settings
+      const settings = loadUserSettings();
+      setUserSettings(settings);
+      
+      // Record this visit
+      updateLastVisit();
+      
+      // Get last visit date for potential welcome back message
+      const lastVisit = getLastVisit();
+      if (lastVisit) {
+        console.log(`Welcome back! Your last visit was on ${new Date(lastVisit).toLocaleString()}`);
+      }
+    }
+  }, []);
 
   // Function to fetch data with status indicators
   const fetchCryptoData = async (force = false) => {
@@ -71,6 +92,13 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Save user settings whenever they change
+  useEffect(() => {
+    if (userSettings && isStorageAvailable()) {
+      saveUserSettings(userSettings);
+    }
+  }, [userSettings]);
+
   return (
     <Router>
       <div className="app-container">
@@ -88,13 +116,13 @@ function App() {
               onClick={handleManualRefresh} 
               disabled={refreshing} 
               className="refresh-button"
-              title={lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString()}` : 'Refresh data'}
+              title={lastUpdated ? `Last updated: ${lastUpdated.toLocaleTimeString([], {hour12: false})}` : 'Refresh data'}
             >
               {refreshing ? 'Refreshing...' : 'Refresh'}
             </button>
             {lastUpdated && (
               <span className="last-updated">
-                Last updated: {lastUpdated.toLocaleTimeString()}
+                Last updated: {lastUpdated.toLocaleTimeString([], {hour12: false})}
               </span>
             )}
           </div>
@@ -107,6 +135,7 @@ function App() {
             <Route path="/" element={<Dashboard cryptoData={cryptoData} />} />
             <Route path="/crypto/:id" element={<CryptoDetail />} />
             <Route path="/market" element={<MarketPage />} />
+            <Route path="/portfolio" element={<Portfolio cryptoData={cryptoData} />} />
           </Routes>
         </main>
         <footer className="app-footer">

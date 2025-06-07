@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -13,7 +13,7 @@ const timeframes = [
   { label: '30d', days: 30 },
   { label: '90d', days: 90 },
   { label: '1y', days: 365 },
-  { label: 'Max', days: 'max' }
+  { label: 'Max', days: 3650 }
 ];
 
 const CryptoDetail = () => {
