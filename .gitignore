@@ -1,16 +1,11 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Build outputs
+dist/
+build/
 
-# testing
-/coverage
+# Dependencies
+node_modules/
 
-# production
-/build
-
-# misc
-.DS_Store
+# Environment files
 .env
 .env.local
 .env.development.local
@@ -18,14 +13,23 @@
 .env.production.local
 Todo.txt
 
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# IDE files
-.idea/
+# Editor directories and files
 .vscode/
-*.sublime-project
-*.sublime-workspace
+.idea/
+*.swp
+*.swo
+*~
 
-todo.txt
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

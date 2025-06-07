@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './styles/App.css';
 import Dashboard from './components/Dashboard';
 import CryptoDetail from './components/CryptoDetail';
@@ -101,9 +101,8 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
-        <header className="app-header">
-          <h1><a href="/">Cryptfolio</a></h1>
+      <div className="app-container">        <header className="app-header">
+          <h1><Link to="/">Cryptfolio</Link></h1>
           <nav>
             <ul>
               <li><Link to="/">Dashboard</Link></li>
