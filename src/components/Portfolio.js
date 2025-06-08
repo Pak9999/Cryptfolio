@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { Pie, Line } from 'react-chartjs-2';
 import '../styles/Portfolio.css';
 import { getCryptoData } from '../services/cryptoService';
@@ -15,7 +15,8 @@ ChartJS.register(
   LineElement, 
   Title, 
   Tooltip, 
-  Legend
+  Legend,
+  Filler
 );
 
 // Color palette for pie chart
