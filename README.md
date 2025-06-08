@@ -102,7 +102,7 @@ npm run deploy          # Deploy to GitHub Pages
 - **Portfolio Sharing**: Export and import portfolios using shareable codes
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Data Persistence**: Your portfolio data is saved locally
-- **Search Functionality**: Find specific cryptocurrencies quickly with both the name or symbol
+- **Search Functionality**: Find specific cryptocurrencies quickly by searching both name and symbol
 
 ## Built With
 

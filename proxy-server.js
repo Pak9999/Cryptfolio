@@ -37,7 +37,7 @@ app.get('/.netlify/functions/crypto-proxy', async (req, res) => {
     
     if (queryParams.toString()) {
       apiUrl += `?${queryParams.toString()}`;
-    }    console.log('Proxying request to:', apiUrl);
+    }    /* console.log('Proxying request to:', apiUrl); */
     
     // Prepare headers with API key if available
     const requestHeaders = {

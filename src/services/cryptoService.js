@@ -101,8 +101,8 @@ const cachedApiCall = async (endpoint, params = {}, cacheKey, cacheDuration) => 
   // Check cache first
   const cachedData = cache.get(fullCacheKey);
   if (cachedData) {
-    console.log(`Using cached data for ${fullCacheKey}`);
-    return cachedData;
+/*     console.log(`Using cached data for ${fullCacheKey}`);
+ */    return cachedData;
   }
 
   // Before making a new request, always save any existing data as stale backup
@@ -121,8 +121,8 @@ const cachedApiCall = async (endpoint, params = {}, cacheKey, cacheDuration) => 
       proxyUrl.searchParams.set(key, value);
     });
     
-    console.log('Making proxy request to:', proxyUrl.toString());
-    
+/*     console.log('Making proxy request to:', proxyUrl.toString());
+ */    
     // Make API call through proxy
     const response = await axios.get(proxyUrl.toString(), { 
       timeout: 15000, // 15 second timeout (increased for proxy)
