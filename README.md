@@ -1,5 +1,26 @@
 # Cryptfolio
 
+<div align="center">
+  <img src="https://img.shields.io/badge/🚀-CRYPTFOLIO-3861FB?style=for-the-badge&labelColor=171924&fontSize=24" alt="Cryptfolio Logo" height="80">
+  
+  <h3 style="margin-top: 1rem; color: #3861FB;">A Personal Cryptocurrency Portfolio Tracker</h3>
+  
+  <p>
+    <img src="https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react" alt="React">
+    <img src="https://img.shields.io/badge/Powered%20by-CoinGecko%20API-58cc02?style=flat-square" alt="CoinGecko">
+    <img src="https://img.shields.io/badge/Charts-Chart.js-FF6384?style=flat-square&logo=chart.js" alt="Chart.js">
+  </p>
+  
+  <p>
+    <img src="https://img.shields.io/github/stars/pak9999/Cryptfolio?style=social" alt="GitHub stars">
+    <img src="https://img.shields.io/github/forks/pak9999/Cryptfolio?style=social" alt="GitHub forks">
+  </p>
+</div>
+
+---
+
+## About Cryptfolio
+
 A sleek, responsive cryptocurrency portfolio tracker built with React that allows users to track their crypto investments and view real-time market data. The application uses the CoinGecko API to fetch live cryptocurrency data and provides charts for detailed market analysis.
 
 ## Getting Started
@@ -62,6 +83,16 @@ npm run dev
 
 **Note:** The `dev:netlify` command is recommended as it uses the authenticated CoinGecko API proxy, avoiding rate limits.
 
+### Available Scripts
+
+```bash
+npm run dev              # Start Vite development server
+npm run dev:netlify      # Start Netlify dev server (recommended)
+npm run build           # Build for production
+npm run preview         # Preview production build
+npm run deploy          # Deploy to GitHub Pages
+```
+
 ## Features
 
 - **Real-time Market Data**: View live cryptocurrency prices and market statistics
@@ -71,7 +102,7 @@ npm run dev
 - **Portfolio Sharing**: Export and import portfolios using shareable codes
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Data Persistence**: Your portfolio data is saved locally
-- **Search Functionality**: Find specific cryptocurrencies quickly with both the name or shorthandle q
+- **Search Functionality**: Find specific cryptocurrencies quickly with both the name or symbol
 
 ## Built With
 
@@ -145,12 +176,19 @@ npm run dev
 ```
 This will start Vite at `http://localhost:5173`
 
+**Local Proxy Alternative:**
+For development without Netlify CLI, you can use the local proxy server:
+```bash
+node proxy-server.js    # Start local proxy (port 8888)
+```
+```bash
+npm run dev            # Start React app (port 5173)
+```
+
 **API Key Configuration:**
 - Add your CoinGecko API key to the `.env` file as `COINGECKO_API_KEY=your_key_here`
 - The local development automatically uses the deployed Netlify proxy with API authentication
 - This ensures consistent behavior between local development and production
-
-### Deployment Options
 
 ### Deployment Options
 
